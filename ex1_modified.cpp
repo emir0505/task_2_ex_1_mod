@@ -1,27 +1,31 @@
 #include "ex1_modified.h"
 
-bool sumEvenIndices(const double* arr, int size, double& result) {
-    if (size <= 0 || arr == nullptr) {
-        return false; // Если размер массива меньше или равен 0 или массив пуст, возвращаем ошибку
-    }
-
-    result = 0.0;
+int sumEvenIndices(float* arr, int size) {
+    int sum = 0;
     for (int i = 0; i < size; i += 2) {
-        result += arr[i];
+        sum += arr[i];
     }
-    return true;
+    return sum;
 }
 
-bool sumIndicesDivisibleByThree(const double* arr, int size, double& result) {
-    if (size <= 0 || arr == nullptr) {
-        return false; // Если размер массива меньше или равен 0 или массив пуст, возвращаем ошибку
-    }
-
-    result = 0.0;
-    for (int i = 0; i < size; ++i) {
+int sumIndicesDivisibleByThree(float* arr, int size) {
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
         if (i % 3 == 0) {
-            result += arr[i];
+            sum += arr[i];
         }
     }
-    return true;
+    return sum;
+}
+
+int calculateDifference(float* arr, int size, int* result) {
+    if (!arr || size <= 0 || !result) {
+        return -1; // Error code for invalid input
+    }
+
+    int sumEven = sumEvenIndices(arr, size);
+    int sumDivThree = sumIndicesDivisibleByThree(arr, size);
+
+    *result = sumEven - sumDivThree;
+    return 0; // Success code
 }

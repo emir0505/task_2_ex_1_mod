@@ -1,38 +1,31 @@
 #include <iostream>
 #include "ex1_modified.h"
 
-int main() {
+void main() {
     int size;
     std::cout << "Enter the size of the array: ";
     std::cin >> size;
 
     if (size <= 0) {
-        std::cerr << "Invalid array size." << std::endl;
-        return 1;
+        std::cerr << "Invalid size!" << std::endl;
+        return;
     }
 
-    double* arr = new double[size];
+    float* arr = new float[size];
 
-    std::cout << "Enter " << size << " elements:" << std::endl;
+    std::cout << "Enter " << size << " elements: ";
     for (int i = 0; i < size; ++i) {
         std::cin >> arr[i];
     }
 
-    double sumEven, sumDivisibleByThree;
+    int result;
+    int status = calculateDifference(arr, size, &result);
 
-    if (sumEvenIndices(arr, size, sumEven)) {
-        std::cout << "Sum of elements with even indices: " << sumEven << std::endl;
+    if (status == 0) {
+        std::cout << "Difference between sums: " << result << std::endl;
     } else {
-        std::cerr << "Error calculating sum of elements with even indices." << std::endl;
-    }
-
-    if (sumIndicesDivisibleByThree(arr, size, sumDivisibleByThree)) {
-        std::cout << "Sum of elements with indices divisible by three: " << sumDivisibleByThree << std::endl;
-    } else {
-        std::cerr << "Error calculating sum of elements with indices divisible by three." << std::endl;
+        std::cerr << "An error occurred while calculating the difference." << std::endl;
     }
 
     delete[] arr;
-
-    return 0;
 }
